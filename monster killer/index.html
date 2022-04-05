@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Matador de Monstros</title>
+        <title>Monster Killer</title>
         <link rel="stylesheet" href="style.css">
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     </head>
@@ -35,10 +35,21 @@
                 <div v-else class="lose">You lost...</div>
             </div>
 
-            <div class="panel buttons"></div>
+            <div class="panel buttons">
+                <template v-if="running">
+                    <button class="btn" id="attack" @click="attack(false)">Attack</button>
+                    <button class="btn" id="sp-attack" @click="attack(true)">Special Attack</button>
+                    <button class="btn" id="heal" @click="healHurt">Heal</button>
+                    <button class="btn" id="give-up" @click="changesGame">Give up</button>
+                </template>
+                <button v-else class="btn" id="start" @click="changesGame">Start game</button>
+            </div>
 
-
-            <div class="panel logs"></div>
+            <div class="panel logs" v-if="logs.length">
+                <ul>
+                    <li v-for="log in logs" :class="log.cls" class="log">{{ log.text }}</li>
+                </ul>
+            </div>
         </div>
         <script src="app.js"></script>
     </body>
