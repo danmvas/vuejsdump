@@ -1,0 +1,41 @@
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app1">
+    <contador></contador>
+    <contador></contador>
+</div>
+
+<hr>
+
+<div id="app2">
+    <contador></contador>
+    <contador></contador>
+</div>
+
+<script>
+    const contador = {
+        template: `
+            <div>
+                <span>{{ contador }}</span> 
+                <button @click="contador++">+</button>  
+                <button @click="contador--">-</button>
+            </div>  
+        `,
+        data() {
+            return { contador: 0 }
+        }
+    }
+
+    // Registro Global, as duas instancias do Vue vao conseguir acessar
+    Vue.component('contador', {
+    })
+
+    new Vue({
+        el: '#app1',
+    })
+
+    new Vue({
+        el: '#app2',
+    })
+</script>
